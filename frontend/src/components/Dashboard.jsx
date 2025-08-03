@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import io from 'socket.io-client';
 import TelemetryPanel from './TelemetryPanel';
 import LapTimeChart from './LapTimeChart';
+import Navbar from './Navbar';
+import DriverStats from './DriverStats';
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -45,19 +47,21 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center space-x-2">
-        <input
-          className="text-black p-2"
-          value={favoriteDriver}
-          onChange={(e) => setFavoriteDriver(e.target.value)}
-          placeholder="Driver number e.g. 1"
+      <Navbar
+        favoriteDriver={favoriteDriver}
+        onFavoriteChange={setFavoriteDriver}
+        onSave={handleSave}
+      />
+      <div className="grid grid-cols-2 gap-4 auto-rows-fr">
+        <DriverStats
+          favoriteDriver={favoriteDriver}
+          lap={laps.length ? laps[laps.length - 1] : null}
         />
-        <button className="bg-red-600 px-3 py-2 rounded" onClick={handleSave}>
-          Save
-        </button>
+        <TelemetryPanel telemetry={telemetry} />
+        <div className="col-span-2">
+          <LapTimeChart laps={laps} />
+        </div>
       </div>
-      <TelemetryPanel telemetry={telemetry} />
-      <LapTimeChart laps={laps} />
     </div>
   );
 }
