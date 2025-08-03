@@ -92,7 +92,7 @@ io.on("connection", async (socket) => {
 
 async function fetchLatestSession() {
   const res = await fetch(
-    "https://api.openf1.org/v1/sessions?order_by=-session_key&limit=1"
+    "https://api.openf1.org/v1/sessions?session_key=latest"
   )
   const json = await res.json()
   if (!Array.isArray(json) || json.length === 0) {
