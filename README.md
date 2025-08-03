@@ -2,6 +2,10 @@
 
 This project is an MVP for a real-time Formula 1 race dashboard.
 
+## Prerequisites
+- Node.js 18+
+- npm 9+
+
 ## Packages
 - `backend` – Node.js/Express server with JWT auth and Socket.IO streaming from the OpenF1 API.
 - `frontend` – React dashboard using D3.js for charts.
@@ -29,4 +33,16 @@ A seed user exists:
 ```
 username: demo
 password: password
+```
+
+## Testing
+
+Each package includes a simple test script to confirm Node.js is available:
+
+```bash
+cd backend
+npm test
+
+cd frontend
+npm test
 ```
